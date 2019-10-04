@@ -5,6 +5,8 @@ import firbaseApp from "./lib/firebase-config";
 import "primereact/resources/themes/omega/theme.css";
 import "primereact/resources/primereact.min.css";
 import "font-awesome/css/font-awesome.css";
+import {data} from "./lib/firebase-config";
+import PushToken from "./lib/pushToken";
 import { Button } from "primereact/components/button/Button";
 import { Message } from "primereact/components/message/Message";
 import {
@@ -94,6 +96,11 @@ accordionTabList.push(accordionTab);
       });
   }
 
+  addData = (item) => {
+    console.log(item);
+    data.push(item);
+  }
+
   render() {
     const appName = "Welcome to Firebase Client App";
     return (
@@ -109,6 +116,8 @@ accordionTabList.push(accordionTab);
           </p>
           <div>
             <Button label="Generate Token" onClick={this.handleClick} />
+            <PushToken getData={this.state.message}
+                pushTokenClick={(item) => this.addData(item)}></PushToken>
           </div>;
           <div>
             <Message severity={this.state.status} text={this.state.message} />
